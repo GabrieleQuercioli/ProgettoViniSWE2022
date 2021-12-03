@@ -24,14 +24,13 @@ public class Cantina {
         numBotti++;
     }
 
-    public void removeVino(Vino v){
-        for (int i = 0; i<botti.size(); i++){
-            if ( v == botti.get(new Integer(i)) ){
-                botti.remove(i,v);                      //basta remove(i)? da controllare il funzionamento
+    public void removeVino(Vino v){                                    //FIXME non funziona
+        for (Integer key : botti.keySet()){
+            if ( v == botti.get(key) ){
+                botti.remove(key,botti.get(key));                      //basta remove(i)? da controllare il funzionamento
                 numBotti--;
             }
         }
-        //TODO da implementare
     }
 
     //Singleton getInstance: deve essere chiamato questo quando voglio costruire la cantina (nel main) e poi in seguito voglio
@@ -40,6 +39,20 @@ public class Cantina {
         if(cantina == null)
             cantina = new Cantina(numStanze);
         return cantina;
+    }
+
+    public Vino getVino(int idBotte) {
+        return botti.get(new Integer(idBotte));
+    }
+
+    public int getSizeHashMap() {
+        return botti.size();
+    }
+
+    public void printHashMap() {
+        for (Integer key : botti.keySet()){
+            System.out.println("botte numero: " + key + " , " + botti.get(key).getName());
+        }
     }
 
 }

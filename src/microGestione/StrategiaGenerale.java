@@ -13,6 +13,7 @@ public class StrategiaGenerale implements StrategiaVino {
 
     @Override
     public void gestisciVino(Vino v) {
+        System.out.println("\nIl Vino " + v.getName() + " verrà buttato");
         cantina.removeVino(v);
     }
 }
