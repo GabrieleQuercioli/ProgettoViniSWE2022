@@ -27,9 +27,8 @@ public class Cantina {
     public void removeVino(Vino v){                                    
         for (Integer key : botti.keySet()){
             if ( v == botti.get(key) ){
-                //botti.remove(key, botti.get(key));                      //basta remove(i)? da controllare il funzionamento
-                //numBotti--;
                 botti.replace(key, null);                               //mette a null il vino nella botte
+                //numBotti--;
             }
         }
     }
