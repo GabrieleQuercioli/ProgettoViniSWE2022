@@ -27,8 +27,9 @@ public class Cantina {
     public void removeVino(Vino v){                                    //FIXME non funziona
         for (Integer key : botti.keySet()){
             if ( v == botti.get(key) ){
-                botti.remove(key,botti.get(key));                      //basta remove(i)? da controllare il funzionamento
-                numBotti--;
+                //botti.remove(key, botti.get(key));                      //basta remove(i)? da controllare il funzionamento
+                //numBotti--;
+                botti.replace(key, null);                               //mette a null il vino nella botte
             }
         }
     }
@@ -51,7 +52,10 @@ public class Cantina {
 
     public void printHashMap() {
         for (Integer key : botti.keySet()){
-            System.out.println("botte numero: " + key + " , " + botti.get(key).getName());
+            if (botti.get(key) != null)
+                System.out.println("botte numero: " + key + " , " + botti.get(key).getName());
+            else
+                System.out.println("botte numero: " + key + " vuota");
         }
     }
 

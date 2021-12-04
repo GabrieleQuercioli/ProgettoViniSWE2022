@@ -38,11 +38,11 @@ public abstract class Vino extends Observable {
     public float getOssigeno() {return ossigeno;}
 
     public void printVino() {
-        System.out.println("\n" + "Nome: " + name + "\n");
+        System.out.println("Nome: " + name + "\n");
         System.out.println("Anidride Solforosa: " + anidrideSolforosa + " mg/L");
         System.out.println("pH: " + pH);
         System.out.println("Zuccheri Riduttori: " + zuccheriRiduttori + " mg/L");
         System.out.println("Grado Alcolico: " + gradoAlcolico + " %");
-        System.out.println("Ossigeno: " + ossigeno + " mg/L");
+        System.out.println("Ossigeno: " + ossigeno + " mg/L\n");
     }
 }

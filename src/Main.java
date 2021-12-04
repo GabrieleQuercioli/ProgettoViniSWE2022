@@ -27,13 +27,13 @@ public class Main {
         Observer obs1 = new MonitorVino();
         v1.addObserver(obs1);
 
-        v0.printVino();
+        v1.printVino();
 
 
         boolean variazione0 = v0.varia();
         boolean variazione1 = v1.varia();
 
-        v0.printVino();
+        v1.printVino();
 
         c.printHashMap();
 

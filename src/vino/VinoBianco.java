@@ -8,10 +8,10 @@ public class VinoBianco extends Vino {
 
     @Override
     public boolean varia() {
-        anidrideSolforosa = 190 + (float)(Math.random()*50);    //tra 190 e 240
-        pH = 2 + (float)(Math.random()*4);                      //tra 2 e 6
-        zuccheriRiduttori = 240 + (float)(Math.random()*50);    //tra 230 e 290
-        gradoAlcolico =  (float)(7.5 + Math.random()*9);        //tra 7.5 e 16.5 */
+        anidrideSolforosa = 170 + (float)(Math.random()*50);    //tra 170 e 220
+        pH = (float)(2.9 + Math.random()*0.5);                  //tra 2.9 e 3.4
+        zuccheriRiduttori = 220 + (float)(Math.random()*50);    //tra 220 e 270
+        gradoAlcolico =  (float)(9 + Math.random()*6);          //tra 9 e 15 */
         ossigeno = (float)(0.3 + Math.random() * 0.5);          //tra 0.3 e 0.8
 
         setChanged();
