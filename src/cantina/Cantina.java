@@ -24,7 +24,7 @@ public class Cantina {
         numBotti++;
     }
 
-    public void removeVino(Vino v){                                    //FIXME non funziona
+    public void removeVino(Vino v){                                    
         for (Integer key : botti.keySet()){
             if ( v == botti.get(key) ){
                 //botti.remove(key, botti.get(key));                      //basta remove(i)? da controllare il funzionamento
