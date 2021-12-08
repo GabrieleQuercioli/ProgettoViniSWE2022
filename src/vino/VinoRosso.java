@@ -8,12 +8,11 @@ public class VinoRosso extends  Vino {
 
     @Override
     public boolean varia() {
-        //TODO implementa il metodo
         anidrideSolforosa = 120 + (float)(Math.random()*50);    //tra 120 e 170
-        pH = (float)(3.2 + Math.random()*0.5);                  //tra 3.2 e 3.7
+        pH = (float)(3.2 + Math.random()*0.4);                  //tra 3.2 e 3.6
         zuccheriRiduttori = 170 + (float)(Math.random()*50);    //tra 170 e 220
-        gradoAlcolico =  (float)(8 + Math.random()*10);         //tra 8 e 18
-        ossigeno = (float)(0.3 + Math.random() * 0.5);           //tra 0.3 e 0.8
+        gradoAlcolico =  (float)(9 + Math.random()*8);          //tra 9 e 17
+        ossigeno = (float)(0.3 + Math.random() * 0.5);          //tra 0.3 e 0.8
 
         setChanged();
 
@@ -37,6 +36,9 @@ public class VinoRosso extends  Vino {
             notifyObservers(new Float(ossigeno));
             return true;
         }
-        else return false;
+        else{
+            System.out.println("\nIl Vino " + name + " non ha richiesto alcun intervento");
+            return false;
+        }
     }
 }

@@ -20,15 +20,25 @@ public class Cantina {
     }
 
     public void addVino(int idBotte, Vino v) {
-        botti.put(new Integer(idBotte), v);
-        numBotti++;
+        Integer key = new Integer(idBotte);
+        if(!botti.containsKey(key))
+        {
+            botti.put(key, v);
+            System.out.println("\nIl Vino " + v.getName() + " è stato messo nella botte numero: " + idBotte);
+            numBotti++;
+        }
+        else {
+            if (botti.get(key) == null)
+                botti.replace(key, v);
+        }
     }
 
-    public void removeVino(Vino v){                                    
+    public void removeVino(Vino v){
         for (Integer key : botti.keySet()){
             if ( v == botti.get(key) ){
-                botti.replace(key, null);                               //mette a null il vino nella botte
                 //numBotti--;
+                botti.replace(key, null);                                                   //mette a null il vino nella botte
+                System.out.println("\nIl Vino " + v.getName() + " è stato buttato");
             }
         }
     }
@@ -50,6 +60,7 @@ public class Cantina {
     }
 
     public void printHashMap() {
+        System.out.println("\nElenco botti: ");
         for (Integer key : botti.keySet()){
             if (botti.get(key) != null)
                 System.out.println("botte numero: " + key + " , " + botti.get(key).getName());

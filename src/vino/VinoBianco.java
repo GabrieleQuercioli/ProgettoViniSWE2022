@@ -36,6 +36,10 @@ public class VinoBianco extends Vino {
             notifyObservers(new Float(ossigeno));
             return true;
         }
-        else return false;                              //in caso tutti i parametri siano ancora accettabili
+        //in caso tutti i parametri siano ancora accettabili
+        else{
+            System.out.println("\nIl Vino " + name + " non ha richiesto alcun intervento");
+            return false;
+        }
     }
 }

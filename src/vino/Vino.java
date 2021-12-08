@@ -24,6 +24,7 @@ public abstract class Vino extends Observable {
     //non è astratto perchè è uguale per tutti e due i tipi di vino
     //final perchè non deve avere override
     public final void correggiVino(){
+        System.out.println("\nLa quantità di ossigeno nel Vino " + name + " verrà corretta, poichè il suo valore è: " + ossigeno + "\n");
         ossigeno = (float)(Math.random() * 0.5);
     }
 
@@ -38,11 +39,11 @@ public abstract class Vino extends Observable {
     public float getOssigeno() {return ossigeno;}
 
     public void printVino() {
-        System.out.println("Nome: " + name + "\n");
+        System.out.println("\nNome: " + name + "\n");
         System.out.println("Anidride Solforosa: " + anidrideSolforosa + " mg/L");
         System.out.println("pH: " + pH);
         System.out.println("Zuccheri Riduttori: " + zuccheriRiduttori + " mg/L");
         System.out.println("Grado Alcolico: " + gradoAlcolico + " %");
-        System.out.println("Ossigeno: " + ossigeno + " mg/L\n");
+        System.out.println("Ossigeno: " + ossigeno + " mg/L");
     }
 }
