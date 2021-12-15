@@ -2,7 +2,9 @@ package microGestione;
 
 import vino.Vino;
 
-public class StrategiaOssigeno implements StrategiaVino {
+class StrategiaOssigeno implements StrategiaVino {      //package
+
+    //default package costructor
 
     @Override
     public void gestisciVino(Vino v) {

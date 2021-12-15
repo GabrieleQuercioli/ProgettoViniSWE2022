@@ -3,16 +3,23 @@ package microGestione;
 import cantina.Cantina;
 import vino.Vino;
 
-public class StrategiaGenerale implements StrategiaVino {
+import java.security.InvalidParameterException;
+
+class StrategiaGenerale implements StrategiaVino {      //package class
 
     private Cantina cantina;
 
-    public StrategiaGenerale () {  //come istanzio il rifermento all'oggetto cantina?
+    StrategiaGenerale () {                  //package perchè deve essere creato solo in MonitorVino
         cantina = Cantina.getCantina(0);     //gli devo passare un int 'dummy' che non verrà utilizzato
     }
 
     @Override
     public void gestisciVino(Vino v) {
-        cantina.removeVino(v);
+        try {
+            cantina.removeVino(v);
+        } catch (InvalidParameterException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

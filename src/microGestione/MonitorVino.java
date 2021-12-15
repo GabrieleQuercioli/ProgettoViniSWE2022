@@ -10,8 +10,7 @@ public class MonitorVino implements Observer {
 
     //default constructor
 
-    //per decidere la strategia bisognerà passargli il parametro cambiato, a questo punto non è meglio fare tutto in update?
-    public void setStrategy(Vino v, float param){
+    private void setStrategy(Vino v, float param){              //private perchè lo voglio chiamare solo da update()
         if (param == v.getOssigeno())
             strategy = new StrategiaOssigeno();
         else
@@ -25,6 +24,4 @@ public class MonitorVino implements Observer {
         float param = ((Float)changedParameter).floatValue();
         setStrategy(v, param);
     }
-    //Se devo dare un riferimento a Vino nella chiamata a SetStrategy, dovrò avere un riferimento al Vino nella classe,
-    //tale riferimento viene dato dall'observable?
 }

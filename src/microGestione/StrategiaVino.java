@@ -2,7 +2,7 @@ package microGestione;
 
 import vino.Vino;
 
-public interface StrategiaVino {
+interface StrategiaVino {
 
     void gestisciVino(Vino v);
 

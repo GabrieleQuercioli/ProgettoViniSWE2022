@@ -1,4 +1,7 @@
 package vino;
+import javax.naming.InvalidNameException;
+import javax.naming.directory.InvalidAttributeValueException;
+import java.security.InvalidParameterException;
 import java.util.Observable;
 
 public abstract class Vino extends Observable {
@@ -10,8 +13,8 @@ public abstract class Vino extends Observable {
     protected float gradoAlcolico;  //in %
     protected float ossigeno; //in mg/L
 
-    public Vino(String name, boolean bio)       //mettere parametri accettabili che non inneschino osservazione
-    {                                           //TODO mettere solo super() nel costruttore delle derivate
+    public Vino(String name, boolean bio)
+    {
         this.name = name;
         this.bio = bio;
         anidrideSolforosa = 110 + (float)(Math.random()*50);  //tra 110 e 160 escluso
@@ -22,13 +25,12 @@ public abstract class Vino extends Observable {
     }
 
     //non è astratto perchè è uguale per tutti e due i tipi di vino
-    //final perchè non deve avere override
-    public final void correggiVino(){
+    public void correggiVino(){
         System.out.println("\nLa quantità di ossigeno nel Vino " + name + " verrà corretta, poichè il suo valore è: " + ossigeno + "\n");
         ossigeno = (float)(Math.random() * 0.5);
     }
 
-    public abstract boolean varia();    //FIXME è davvero astratto? (le derivate lo implementano diversamente?)
+    public abstract boolean varia();    //è astratto (ognuna delle derivate lo implementa diversamente)
     //questo metodo dovrà occuparsi di inviare alla notify il parametro ossigeno se solo quello è fuori soglia,
     //e se fossero fuori soglia ossigeno e un altro parametro invierà quest'ultimo
 
@@ -38,7 +40,10 @@ public abstract class Vino extends Observable {
 
     public float getOssigeno() {return ossigeno;}
 
-    public void printVino() {
+    public void printVino() throws InvalidParameterException {      //FIXME questo tipo di eccezione non va bene
+        if (this.getName() == null || this.getName().isEmpty()){
+            throw new InvalidParameterException("\nNon è possibile stampare un vino senza nome");
+        }
         System.out.println("\nNome: " + name + "\n");
         System.out.println("Anidride Solforosa: " + anidrideSolforosa + " mg/L");
         System.out.println("pH: " + pH);
