@@ -1,23 +1,20 @@
 package vino;
 
-import javax.management.InvalidAttributeValueException;
+public class VinoRosato extends Vino {
 
-public class VinoRosso extends Vino {
+    public enum TipoRosato{Vulcano, Marques, ValdelleCorti, Voria};
+    private final TipoRosato denominazione;
 
-    public enum TipoRosso{ChiantiClassico, BolgheriSassicaia, Morellino, AmaroneMazzano, BaroloMonprivato,
-        Brunello, Collio, Nobile, Tignanello, Solaia};
-    private final TipoRosso denominazione;
-
-    public VinoRosso(String name, SchedaTecnica st) {
+    public VinoRosato(String name, SchedaTecnica st) {
         super(name, st);
-        denominazione = TipoRosso.valueOf(name);
+        denominazione = TipoRosato.valueOf(name);
     }
 
     @Override
     public boolean varia() {
-        anidrideSolforosa = 120 + (float)(Math.random()*50);    //tra 120 e 170
-        pH = (float)(3.2 + Math.random()*0.4);                  //tra 3.2 e 3.6
-        zuccheriRiduttori = 170 + (float)(Math.random()*50);    //tra 170 e 220
+        anidrideSolforosa = 150 + (float)(Math.random()*50);    //tra 150 e 200
+        pH = (float)(3.1 + Math.random()*0.4);                  //tra 3.1 e 3.5
+        zuccheriRiduttori = 190 + (float)(Math.random()*50);    //tra 190 e 240
         gradoAlcolico =  (float)(9 + Math.random()*8);          //tra 9 e 17
         ossigeno = (float)(0.3 + Math.random() * 0.5);          //tra 0.3 e 0.8
 
@@ -25,15 +22,15 @@ public class VinoRosso extends Vino {
 
         setChanged();
 
-        if (anidrideSolforosa > 160) {
+        if (anidrideSolforosa > 190) {
             notifyObservers(new Float(anidrideSolforosa));     //il notify alla fine chiama clearChanged
             return true;
         }
-        else if (pH < 3.3 || pH > 3.5) {
+        else if (pH < 3.2 || pH > 3.4) {
             notifyObservers(new Float(pH));
             return true;
         }
-        else if (zuccheriRiduttori > 210){
+        else if (zuccheriRiduttori > 230){
             notifyObservers(new Float(zuccheriRiduttori));
             return true;
         }
@@ -50,5 +47,4 @@ public class VinoRosso extends Vino {
             return false;
         }
     }
-
 }

@@ -1,9 +1,15 @@
 package vino;
 
+import javax.management.InvalidAttributeValueException;
+
 public class VinoBianco extends Vino {
 
-    public VinoBianco(String name, boolean bio) {
-        super(name, bio);
+    public enum TipoBianco{Chamonix, Bastianich, Cupresera, Spera, Ceretto, Alsace, Panizzi, Temi, Roero, BottegaVinai};
+    private final TipoBianco denominazione;
+
+    public VinoBianco(String name, SchedaTecnica st) {
+        super(name, st);
+        denominazione = TipoBianco.valueOf(name);
     }
 
     @Override
@@ -13,6 +19,8 @@ public class VinoBianco extends Vino {
         zuccheriRiduttori = 220 + (float)(Math.random()*50);    //tra 220 e 270
         gradoAlcolico =  (float)(9 + Math.random()*6);          //tra 9 e 15 */
         ossigeno = (float)(0.3 + Math.random() * 0.5);          //tra 0.3 e 0.8
+
+        this.safePrintVino();
 
         setChanged();
 
@@ -32,14 +40,15 @@ public class VinoBianco extends Vino {
             notifyObservers(new Float(gradoAlcolico));
             return true;
         }
-        else if (ossigeno > 0.5){
+        else if (ossigeno >= 0.5){
             notifyObservers(new Float(ossigeno));
             return true;
         }
         //in caso tutti i parametri siano ancora accettabili
         else{
-            System.out.println("\nIl Vino " + name + " non ha richiesto alcun intervento");
+            System.out.println("\nIl Vino " + denominazione + " non ha richiesto alcun intervento");
             return false;
         }
     }
+
 }

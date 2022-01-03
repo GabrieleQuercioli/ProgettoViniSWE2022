@@ -1,9 +1,9 @@
 package cantina;
 
-import macroGestione.Stanza;
+import gestionestanze.Stanza;
 import vino.Vino;
 
-import java.security.InvalidParameterException;
+import java.lang.IllegalArgumentException;
 import java.util.LinkedHashMap;
 
 public class Cantina {
@@ -11,9 +11,9 @@ public class Cantina {
     private int numBotti = 0;
     private Stanza[] stanze;
     private LinkedHashMap<Integer , Vino> botti;
-    private static Cantina cantina = null;                  //Singleton: qui ci viene messo il vero oggetto cantina
+    private static Cantina cantina = null;
 
-    private Cantina(int numStanze) throws Error {              // Is a singleton
+    private Cantina(int numStanze) throws Error {
         if (numStanze == 0)
             throw new Error("\nLa cantina deve avere almeno una stanza");
         stanze = new Stanza[numStanze];
@@ -23,20 +23,21 @@ public class Cantina {
         botti = new LinkedHashMap<>();
     }
 
-    //Singleton getInstance: deve essere chiamato questo quando voglio costruire la cantina (nel main)
-    // e poi in seguito voglio accedere alla stessa istanza
+
     public static Cantina getCantina(int numStanze){
         if(cantina == null)
             cantina = new Cantina(numStanze);
         return cantina;
     }
 
-    public void addVino(Vino v) throws InvalidParameterException {
-        if (v == null || v.getName() == null || v.getName().isEmpty())
-            throw new InvalidParameterException("\nNon è possibile inserire un vino nullo o senza nome");
+    public void addVino(Vino v) throws IllegalArgumentException, NullPointerException {
+        if (v == null || v.getName().isEmpty() || v.getSchedaTecnica() == null)
+            throw new IllegalArgumentException("\nNon è possibile inserire un vino nullo, senza nome o scheda tecnica");
+        if (v.getName() == null)
+            throw new NullPointerException("\nNon è possibile inserire un vino con nome nullo");
         for (Integer key : botti.keySet()) {
             if (botti.get(key) == v)
-                throw new InvalidParameterException("\nLo stesso vino " + v.getName() + " è già stato inserito");
+                throw new IllegalArgumentException("\nLo stesso vino " + v.getName() + " è già stato inserito");
         }
 
         boolean found = false;                              //serve per il primo inserimento
@@ -56,19 +57,19 @@ public class Cantina {
         }
     }
 
-    public void removeVino(Vino v) throws InvalidParameterException {
+    public void removeVino(Vino v) throws IllegalArgumentException {
         if (v == null)
-            throw new InvalidParameterException("\nIl vino da rimuovere non può essere nullo");
+            throw new IllegalArgumentException("\nIl vino da rimuovere non può essere nullo");
         boolean found = false;
         for (Integer key : botti.keySet()){
             if ( v == botti.get(key) ){
-                botti.replace(key, null);                                                //mette a null il vino nella botte
+                botti.replace(key, null);
                 found = true;
                 System.out.println("\nIl Vino " + v.getName() + " è stato buttato");
             }
         }
         if (!found)
-            throw new InvalidParameterException("\nIl vino " + v.getName() + " non è presente nella cantina");
+            throw new IllegalArgumentException("\nIl vino " + v.getName() + " non è presente nella cantina");
     }
 
     public Vino getVino(int idBotte) {
@@ -104,5 +105,14 @@ public class Cantina {
 
     public int getNumStanze() {
         return stanze.length;
+    }
+
+    public Integer getKey(Vino v) {                 //serve per i test, dato che un singleton è complicato da testare
+        for (Integer key : botti.keySet())
+        {
+            if (botti.get(key) == v)
+                return key;
+        }
+        return null;
     }
 }
